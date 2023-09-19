@@ -9,6 +9,16 @@ DATA_FILE = 'bot_data.pkl'
 
 bot = telebot.TeleBot('6207980085:AAEWImd2AzOt5QnWiEdKr5VaXG6aCAltguk')
 
+@bot.message_handler(commands=['start'])
+def start(massage):
+    bot.send_message(massage.chat.id, 'Привіт! Я - бот для обліку доходів і витрат. Ось, що я можу для вас зробити: '
+                                      '/add_expense <категорія> <сума> - додати витрату /list_categories - '
+                                      'переглянути доступні категорії /add_income <категорія> <сума> - додати дохід '
+                                      '/list_expenses - переглянути всі витрати /delete <тип> <індекс> - видалити '
+                                      'запис (тип може бути <expense> або <income>) /stats <період> <категорія> - '
+                                      'статистика (період може бути <день>, <тиждень>, <місяць>, <рік>) Спробуйте '
+                                      'одну з цих команд для початку роботи.')
+
 
 @bot.message_handler(commands=['add_expense'])
 def add_expense(message):
