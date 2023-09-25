@@ -81,6 +81,30 @@ def get_stats(message):
     bot.reply_to(message, f"Statistics for {category} in {period}: Total: X, Average: Y")
 
 
+@bot.message_handler(commands=['stats'])
+def get_stats(message):
+    # Check if the command has enough arguments
+    if len(message.text.split(' ')) < 3:
+        bot.reply_to(message, "Usage: /stats <period> <category>")
+        return
+
+    period = message.text.split(' ')[1]
+    category = message.text.split(' ')[2]
+
+    def calculate_total(category):
+        # Calculate the total for the specified category
+        total = 0
+        for expense in data['expenses']:
+            if expense['category'] == category:
+                total += float(expense['amount'])
+        return total
+
+
+    # Return the calculated statistics as a message
+        bot.reply_to(message, f"Statistics for {category} in {period}: Total: {total}, Average: {average}")
+
+
+
 def save_data():
     with open(DATA_FILE, 'wb') as f:
         pickle.dump({'expenses': expenses, 'income': income}, f)
