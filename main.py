@@ -83,7 +83,7 @@ def get_stats(message):
 
 @bot.message_handler(commands=['stats'])
 def get_stats(message):
-    # Check if the command has enough arguments
+
     if len(message.text.split(' ')) < 3:
         bot.reply_to(message, "Usage: /stats <period> <category>")
         return
@@ -92,7 +92,7 @@ def get_stats(message):
     category = message.text.split(' ')[2]
 
     def calculate_total(category):
-        # Calculate the total for the specified category
+
         total = 0
         for expense in data['expenses']:
             if expense['category'] == category:
@@ -100,7 +100,7 @@ def get_stats(message):
         return total
 
 
-    # Return the calculated statistics as a message
+
         bot.reply_to(message, f"Statistics for {category} in {period}: Total: {total}, Average: {average}")
 
 
